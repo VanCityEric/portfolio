@@ -1,31 +1,28 @@
-// Add this to your existing script.js file
-
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Your existing typing effect code ---
-  const typingElement = document.getElementById("typing-effect");
-  const textToType = "Hello, I'm Eric.";
-  let charIndex = 0;
-  const typingSpeed = 120;
+  const typingElement = document.getElementById('typing-effect');
+    const textToType = "Hello, I'm Eric.";  // Text without emoji
+    const emoji = " 🙋🏻‍♂️";  // Emoji to add after typing completes
+    let charIndex = 0;
+    const typingSpeed = 120;
 
-  if (typingElement) {
-    // Check if the element exists
-    typingElement.textContent = ""; // Clear it initially
+    if (typingElement) { // Check if the element exists
+        typingElement.textContent = ''; // Clear it initially
 
-    function type() {
-      if (charIndex < textToType.length) {
-        typingElement.textContent += textToType.charAt(charIndex);
-        charIndex++;
-        setTimeout(type, typingSpeed);
-      } else {
-        typingElement.classList.add("typing-done");
-      }
+        function type() {
+            if (charIndex < textToType.length) {
+                typingElement.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingSpeed);
+            } else {
+                typingElement.textContent += emoji;
+                typingElement.classList.add('typing-done');
+            }
+        }
+        setTimeout(type, 500); 
+    } else {
+        console.error("Element with ID 'typing-effect' not found.");
     }
-    setTimeout(type, 500); // Start typing
-  } else {
-    console.error("Element with ID 'typing-effect' not found.");
-  }
 
-  // --- Non-interactive particle background effect ---
   const canvas = document.createElement("canvas");
   canvas.id = "particle-canvas";
   const landing = document.getElementById("landing");
@@ -33,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ctx = canvas.getContext("2d");
 
-  // Set canvas dimensions to match parent
   function resizeCanvas() {
     canvas.width = landing.offsetWidth;
     canvas.height = landing.offsetHeight;
